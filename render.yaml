@@ -1,0 +1,18 @@
+# Render blueprint — one-click deploy.
+# In the Render dashboard: New → Blueprint → connect this repo. Render reads
+# this file and provisions the service. Because the bot uses Slack Socket Mode
+# it has no inbound HTTP port, so it runs as a background worker. After the
+# first deploy, set the tokens below in the service's Environment tab (they are
+# intentionally not stored in the repo).
+services:
+  - type: worker
+    name: ai-slack-agent
+    runtime: docker
+    plan: free
+    envVars:
+      - key: SLACK_BOT_TOKEN
+        sync: false
+      - key: SLACK_APP_TOKEN
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
